@@ -1,0 +1,25 @@
+﻿@model TodoApp.Models.Todo
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div>
+        <label asp-for="TodoTitle"></label>
+        <input asp-for="TodoTitle" class="form-control" />
+        <span asp-validation-for="TodoTitle" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="TodoDescription"></label>
+        <textarea asp-for="TodoDescription" class="form-control"></textarea>
+        <span asp-validation-for="TodoDescription" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="DueDate"></label>
+        <input asp-for="DueDate" type="date" class="form-control" />
+        <span asp-validation-for="DueDate" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+</form>

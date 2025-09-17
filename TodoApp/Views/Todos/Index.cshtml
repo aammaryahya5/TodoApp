@@ -1,0 +1,45 @@
+﻿@model IEnumerable<TodoApp.Models.Todo>
+
+<h2>Ma To-Do List</h2>
+
+<div class="mb-3">
+    <a asp-action="Index" asp-route-filter="all" class="btn btn-secondary">Toutes</a>
+    <a asp-action="Index" asp-route-filter="todo" class="btn btn-warning">À faire</a>
+    <a asp-action="Index" asp-route-filter="done" class="btn btn-success">Complétées</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>État</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.TodoTitle</td>
+                <td>@item.TodoDescription</td>
+                <td>@(item.DueDate.HasValue? item.DueDate.Value.ToShortDateString() : "Non définie")</td>
+                <td>
+                    <form asp-action="MarkDone" method="post" style="display:inline">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-sm @(item.IsDone ? "btn-success" : "btn-secondary")">
+                            @(item.IsDone ? "✅ Fait" : "❌ À faire")
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Supprimer</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-primary">➕ Ajouter une tâche</a>

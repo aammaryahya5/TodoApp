@@ -1,0 +1,13 @@
+# Fichiers temporaires
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.dbmdl
+
+# Logs
+*.log
+
+# Config sensitive
+appsettings.Development.json
